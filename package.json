@@ -1,0 +1,53 @@
+{
+  "name": "Colourful",
+  "version": "1.0.0",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "prepare": "husky install",
+    "lint": "eslint .",
+    "typescript": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "1.18.2",
+    "@react-navigation/native": "6.1.7",
+    "@react-navigation/stack": "6.3.17",
+    "@reduxjs/toolkit": "1.9.5",
+    "expo": "49.0.11",
+    "expo-font": "~11.4.0",
+    "expo-image-picker": "~14.3.2",
+    "expo-splash-screen": "0.20.5",
+    "i18next": "21.6.16",
+    "react": "18.2.0",
+    "react-i18next": "11.16.6",
+    "react-native": "0.72.6",
+    "react-native-gesture-handler": "~2.12.0",
+    "react-native-reanimated": "~3.3.0",
+    "react-redux": "8.1.2",
+    "reanimated-color-picker": "^2.4.2",
+    "expo-media-library": "~15.4.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-export-namespace-from": "7.18.9",
+    "@types/node": "20.8.2",
+    "@types/react": "18.2.14",
+    "@typescript-eslint/eslint-plugin": "6.5.0",
+    "@typescript-eslint/parser": "6.5.0",
+    "babel-plugin-module-resolver": "5.0.0",
+    "eslint": "8.40.0",
+    "eslint-config-prettier": "8.8.0",
+    "eslint-plugin-jsx-a11y": "6.7.1",
+    "eslint-plugin-prettier": "4.2.1",
+    "eslint-plugin-react": "7.32.2",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-react-refresh": "0.4.3",
+    "eslint-plugin-simple-import-sort": "7.0.0",
+    "husky": "8.0.0",
+    "prettier": "2.6.2",
+    "typescript": "5.1.6"
+  },
+  "private": true
+}
