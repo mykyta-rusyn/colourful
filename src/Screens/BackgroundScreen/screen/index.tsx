@@ -5,13 +5,14 @@ import {BackgroundScreenProps} from '../../ScreenParams';
 
 import {styles} from './styles';
 
-import {Button, Description, IconPicker, saveBackgroundImage, Theme, useLocal, useTheme} from '@colourful/general';
+import {Button, Description, ImagePicker, saveBackgroundImage, Theme, useLocal, useTheme} from '@colourful/general';
 import {launchImageLibraryAsync, MediaTypeOptions} from 'expo-image-picker';
 
 export const BackgroundScreen: React.FC<BackgroundScreenProps> = () => {
 	const [image, setImage] = React.useState<string>();
 	const {changeBackgroundImage} = useTheme();
 	const {t} = useLocal();
+
 	const pickImage = React.useCallback(async () => {
 		const result = await launchImageLibraryAsync({
 			mediaTypes: MediaTypeOptions.Images,
@@ -28,12 +29,7 @@ export const BackgroundScreen: React.FC<BackgroundScreenProps> = () => {
 	const onRemoveImage = React.useCallback(() => setImage(undefined), []);
 
 	const onSaveImage = React.useCallback(async () => {
-		const saved = await saveBackgroundImage(image!);
-
-		if (!saved) {
-			return;
-		}
-
+		await saveBackgroundImage(image!);
 		changeBackgroundImage(image!);
 	}, [changeBackgroundImage, image]);
 
@@ -42,8 +38,7 @@ export const BackgroundScreen: React.FC<BackgroundScreenProps> = () => {
 			source={{uri: image}}
 			style={styles.root}
 		>
-			<IconPicker
-				// image={image}
+			<ImagePicker
 				index={0}
 				pickImage={pickImage}
 				title={t('background_button')}

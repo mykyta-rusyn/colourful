@@ -2,7 +2,7 @@ import React from 'react';
 import {DefaultTheme, NavigationContainer, Theme as NavigationTheme} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import {Background, HeaderButtons, loadImages, loadSavedLang, loadTheme, Theme, useLocal, useTheme} from '@colourful/general';
+import {Background, HeaderButtons, loadBackgroundImage, loadImages, loadSavedLang, loadTheme, Theme, useLocal, useTheme} from '@colourful/general';
 import {BackgroundScreen, ColorsScreen, FontsScreen, HomeScreen, IconsScreen, NavigationParam} from '@colourful/screens';
 import {hideAsync} from 'expo-splash-screen';
 import i18n from 'i18next';
@@ -18,18 +18,27 @@ const navTheme: NavigationTheme = {
 
 export const Navigator: React.FC = () => {
 	const {t} = useLocal();
-	const {colors, changeTheme, activeFont, changeImages, backgroundImage} = useTheme();
+	const {
+		activeFont,
+		backgroundImage,
+		changeBackgroundImage,
+		changeImages,
+		changeTheme,
+		colors,
+	} = useTheme();
 	const [isLoaded, setIsLoaded] = React.useState(false);
 	const [isLayout, setIsLayout] = React.useState(false);
 	const [isFontLoaded, setIsFontLoaded] = React.useState(false);
 
 	React.useEffect(() => {
 		Promise.all([
+			Theme.loadFonts(setIsFontLoaded),
 			loadSavedLang(i18n.changeLanguage),
 			loadTheme(changeTheme),
-			Theme.loadFonts(setIsFontLoaded),
-			loadImages(changeImages)
-		]).then(() => setIsLoaded(true));
+			loadImages(changeImages),
+			loadBackgroundImage(changeBackgroundImage)
+		])
+			.then(() => setIsLoaded(true));
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -55,6 +64,7 @@ export const Navigator: React.FC = () => {
 							},
 							headerStyle: {
 								backgroundColor: backgroundImage ? 'transparent' : colors.backgroundHeader,
+								shadowColor: backgroundImage ? 'transparent' : undefined,
 							},
 							cardStyle: {
 								backgroundColor: backgroundImage ? 'transparent' : colors.background,

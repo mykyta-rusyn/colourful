@@ -5,7 +5,7 @@ import {IconsScreenProp} from '../../ScreenParams';
 
 import {styles} from './styles';
 
-import {Button, Description, IconPicker, ImageType, saveImages, useLocal, useTheme} from '@colourful/general';
+import {Button, Description, ImagePicker, ImageType, saveImages, useLocal, useTheme} from '@colourful/general';
 import {launchImageLibraryAsync, MediaTypeOptions} from 'expo-image-picker';
 
 export const IconsScreen: React.FC<IconsScreenProp> = () => {
@@ -42,12 +42,7 @@ export const IconsScreen: React.FC<IconsScreenProp> = () => {
 	}, [onRemoveImages]);
 
 	const onSaveImages = React.useCallback(async () => {
-		const saved = await saveImages(images as [string, string], type);
-
-		if (!saved) {
-			return;
-		}
-
+		await saveImages(images as [string, string], type);
 		changeImages(type === 'language' ? {
 			localize: {
 				en: images[0],
@@ -67,7 +62,7 @@ export const IconsScreen: React.FC<IconsScreenProp> = () => {
 				contentContainerStyle={styles.pickers}
 				showsVerticalScrollIndicator={false}
 			>
-				<IconPicker
+				<ImagePicker
 					image={images[0]}
 					index={0}
 					pickImage={pickImage}
@@ -78,7 +73,7 @@ export const IconsScreen: React.FC<IconsScreenProp> = () => {
 					})}
 				/>
 
-				<IconPicker
+				<ImagePicker
 					image={images[1]}
 					index={1}
 					pickImage={pickImage}

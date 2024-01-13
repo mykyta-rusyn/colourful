@@ -13,7 +13,7 @@ type Props = {
 	index: number
 }
 
-export const IconPicker: React.FC<Props> = (props) => {
+export const ImagePicker: React.FC<Props> = (props) => {
 	const {colors} = useTheme();
 	const imageStyle = React.useMemo(() => (
 		StyleSheet.flatten<ImageStyle>([styles.image, {

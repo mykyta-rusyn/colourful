@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, TouchableOpacity} from 'react-native';
 
-import {saveLang} from '../../actions';
+import {removeImages, saveLang} from '../../actions';
 import {useLocal} from '../../localization';
 import {useTheme} from '../../theme';
 
@@ -12,7 +12,7 @@ import {globalState, useAppSelector} from '@colourful/states';
 
 export const LanguageButton: React.FC = () => {
 	const {currentLang, changeLanguage} = useLocal();
-	const {colors} = useTheme();
+	const {colors, changeImages} = useTheme();
 	const image = useAppSelector(globalState.selectors.localizationImage);
 	const isEng = currentLang === 'en';
 	const selectedImage
@@ -31,6 +31,11 @@ export const LanguageButton: React.FC = () => {
 		saveLang(newLanguage);
 	}, [changeLanguage, isEng]);
 
+	const onError = React.useCallback(() => {
+		changeImages();
+		removeImages('language');
+	}, [changeImages]);
+
 	return (
 		<TouchableOpacity
 			activeOpacity={0.7}
@@ -40,6 +45,7 @@ export const LanguageButton: React.FC = () => {
 				source={selectedImage}
 				style={styles.image}
 				tintColor={colors.languageSwitch ?? undefined}
+				onError={onError}
 			/>
 		</TouchableOpacity>
 	);
