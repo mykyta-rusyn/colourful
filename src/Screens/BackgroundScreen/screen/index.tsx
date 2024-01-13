@@ -12,6 +12,7 @@ export const BackgroundScreen: React.FC<BackgroundScreenProps> = () => {
 	const [image, setImage] = React.useState<string>();
 	const {changeBackgroundImage} = useTheme();
 	const {t} = useLocal();
+
 	const pickImage = React.useCallback(async () => {
 		const result = await launchImageLibraryAsync({
 			mediaTypes: MediaTypeOptions.Images,

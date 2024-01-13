@@ -65,10 +65,6 @@ export const Navigator: React.FC = () => {
 							headerStyle: {
 								backgroundColor: backgroundImage ? 'transparent' : colors.backgroundHeader,
 								shadowColor: backgroundImage ? 'transparent' : undefined,
-								shadowOffset: backgroundImage ? {
-									height: 0,
-									width: 0
-								} : undefined,
 							},
 							cardStyle: {
 								backgroundColor: backgroundImage ? 'transparent' : colors.background,
