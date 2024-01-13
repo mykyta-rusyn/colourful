@@ -8,7 +8,7 @@ import {styles} from './styles';
 import {Button, Description, ImagePicker, saveBackgroundImage, Theme, useLocal, useTheme} from '@colourful/general';
 import {launchImageLibraryAsync, MediaTypeOptions} from 'expo-image-picker';
 
-export const BackgroundScreen: React.FC<BackgroundScreenProps> = () => {
+export const BackgroundScreen: React.FC<BackgroundScreenProps> = ({navigation}) => {
 	const [image, setImage] = React.useState<string>();
 	const {changeBackgroundImage} = useTheme();
 	const {t} = useLocal();
@@ -31,7 +31,8 @@ export const BackgroundScreen: React.FC<BackgroundScreenProps> = () => {
 	const onSaveImage = React.useCallback(async () => {
 		await saveBackgroundImage(image!);
 		changeBackgroundImage(image!);
-	}, [changeBackgroundImage, image]);
+		navigation.goBack();
+	}, [changeBackgroundImage, image, navigation]);
 
 	return (
 		<ImageBackground

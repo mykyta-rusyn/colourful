@@ -1,8 +1,10 @@
 import React from 'react';
-import {ImageBackground, StyleSheet, View} from 'react-native';
+import {StyleSheet} from 'react-native';
+import Animated, {FadeIn, FadeOut} from 'react-native-reanimated';
 
 import {removeBackgroundImage} from '../../actions';
 import {styles, useTheme} from '../../theme';
+import {AnimatedImageBackground} from '../Animated';
 
 type Props = {
 	onLayout: () => void
@@ -27,23 +29,27 @@ export const Background: React.FC<
 
 	if (backgroundImage !== undefined) {
 		return (
-			<ImageBackground
+			<AnimatedImageBackground
+				entering={FadeIn}
+				exiting={FadeOut}
 				source={{uri: backgroundImage}}
 				style={style}
 				onError={onError}
 				onLayout={props.onLayout}
 			>
 				{children}
-			</ImageBackground>
+			</AnimatedImageBackground>
 		);
 	}
 
 	return (
-		<View
+		<Animated.View
+			entering={FadeIn}
+			exiting={FadeOut}
 			style={style}
 			onLayout={props.onLayout}
 		>
 			{children}
-		</View>
+		</Animated.View>
 	);
 });

@@ -1,17 +1,20 @@
 import React from 'react';
 import {ScrollView, View} from 'react-native';
 
-import {IconsScreenProp} from '../../ScreenParams';
+import {ImagesScreenProp} from '../../ScreenParams';
 
 import {styles} from './styles';
 
-import {Button, Description, ImagePicker, ImageType, saveImages, useLocal, useTheme} from '@colourful/general';
+import {Button, Description, ImagePicker, ImageType, LocalizationKey, saveImages, useLocal, useTheme} from '@colourful/general';
 import {launchImageLibraryAsync, MediaTypeOptions} from 'expo-image-picker';
 
-export const IconsScreen: React.FC<IconsScreenProp> = () => {
+export const ImagesScreen: React.FC<ImagesScreenProp> = () => {
 	const {changeImages} = useTheme();
 	const [type, setType] = React.useState<ImageType>('language');
-	const iconTypes = React.useMemo(() => (
+	const anotherType = React.useMemo<ImageType>(() => (
+		type === 'language' ? 'theme' : 'language'
+	), [type]);
+	const iconTypes = React.useMemo<LocalizationKey[]>(() => (
 		type === 'language' ? ['en', 'uk'] : ['dark', 'light']
 	), [type]);
 	const [images, setImagesState] = React.useState<string[]>([]);
@@ -68,7 +71,7 @@ export const IconsScreen: React.FC<IconsScreenProp> = () => {
 					pickImage={pickImage}
 					title={t('icons', {
 						take: t(images[0] !== undefined ? 'retake' : 'take'),
-						iconType: iconTypes[0],
+						iconType: t(iconTypes[0]),
 						type: t(type)
 					})}
 				/>
@@ -79,7 +82,7 @@ export const IconsScreen: React.FC<IconsScreenProp> = () => {
 					pickImage={pickImage}
 					title={t('icons', {
 						take: t(images[1] !== undefined ? 'retake' : 'take'),
-						iconType: iconTypes[1],
+						iconType: t(iconTypes[1]),
 						type: t(type)
 					})}
 				/>
@@ -96,10 +99,10 @@ export const IconsScreen: React.FC<IconsScreenProp> = () => {
 					onPress={onRemoveImages}
 				/>
 				<Button
-					title={t(`icons_toggle_${type}`)}
+					title={t(`icons_toggle_${anotherType}`)}
 					onPress={toggleType}
 				/>
-				<Description descriptionKey={`icons_description_${type}`} />
+				<Description descriptionKey={`icons_description_${anotherType}`} />
 			</View>
 		</View>
 	);

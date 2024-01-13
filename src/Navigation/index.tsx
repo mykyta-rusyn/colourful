@@ -3,7 +3,7 @@ import {DefaultTheme, NavigationContainer, Theme as NavigationTheme} from '@reac
 import {createStackNavigator} from '@react-navigation/stack';
 
 import {Background, HeaderButtons, loadBackgroundImage, loadImages, loadSavedLang, loadTheme, Theme, useLocal, useTheme} from '@colourful/general';
-import {BackgroundScreen, ColorsScreen, FontsScreen, HomeScreen, IconsScreen, NavigationParam} from '@colourful/screens';
+import {BackgroundScreen, ColorsScreen, FontsScreen, HomeScreen, ImagesScreen, NavigationParam} from '@colourful/screens';
 import {hideAsync} from 'expo-splash-screen';
 import i18n from 'i18next';
 
@@ -68,7 +68,6 @@ export const Navigator: React.FC = () => {
 							},
 							cardStyle: {
 								backgroundColor: backgroundImage ? 'transparent' : colors.background,
-
 							},
 							headerRight: HeaderButtons,
 						}}
@@ -88,8 +87,8 @@ export const Navigator: React.FC = () => {
 							}}
 						/>
 						<Stack.Screen
-							component={IconsScreen}
-							name='IconsScreen'
+							component={ImagesScreen}
+							name='ImagesScreen'
 							options={{
 								headerTitle: t('icons_title')
 							}}

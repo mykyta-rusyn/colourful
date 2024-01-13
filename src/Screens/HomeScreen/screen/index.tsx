@@ -16,7 +16,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
 	}
 
 	function goToIcons() {
-		navigation.navigate('IconsScreen');
+		navigation.navigate('ImagesScreen');
 	}
 
 	function goToFonts() {

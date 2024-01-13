@@ -1,5 +1,6 @@
 import React from 'react';
-import {Image, ImageStyle, StyleSheet, View} from 'react-native';
+import {ImageStyle, StyleSheet, View} from 'react-native';
+import Animated, {FadeIn, FadeOut} from 'react-native-reanimated';
 
 import {useTheme} from '../../theme';
 import {Button} from '../Button';
@@ -33,7 +34,9 @@ export const ImagePicker: React.FC<Props> = (props) => {
 				onPress={onPress}
 			/>
 			{isImage ? (
-				<Image
+				<Animated.Image
+					entering={FadeIn}
+					exiting={FadeOut}
 					source={{uri: props.image}}
 					style={imageStyle}
 				/>
