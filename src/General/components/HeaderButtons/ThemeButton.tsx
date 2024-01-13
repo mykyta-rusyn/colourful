@@ -1,16 +1,15 @@
 import React from 'react';
-import {Image, TouchableOpacity} from 'react-native';
-import Animated, {FadeInDown, FadeInUp, FadeOutDown, FadeOutUp} from 'react-native-reanimated';
+import {Image} from 'react-native';
+import {FadeIn, FadeOut} from 'react-native-reanimated';
 
 import {removeImages} from '../../actions';
 import {useTheme} from '../../theme';
+import {AnimatedTouchableOpacity} from '../Animated';
 
 import {images} from './res';
 import {styles} from './sharedStyles';
 
 import {globalState, useAppSelector} from '@colourful/states';
-
-const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);
 
 export const ThemeButton: React.FC = () => {
 	const {colors, theme, toggleTheme, changeImages} = useTheme();
@@ -33,8 +32,8 @@ export const ThemeButton: React.FC = () => {
 	return (
 		<AnimatedTouchableOpacity
 			activeOpacity={0.7}
-			entering={isDark ? FadeInDown : FadeInUp}
-			exiting={isDark ? FadeOutDown : FadeOutUp}
+			entering={FadeIn}
+			exiting={FadeOut}
 			key={theme}
 			onPress={toggleTheme}
 		>
