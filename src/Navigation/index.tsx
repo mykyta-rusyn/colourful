@@ -104,7 +104,10 @@ export const Navigator: React.FC = () => {
 							component={BackgroundScreen}
 							name='BackgroundScreen'
 							options={{
-								headerTitle: t('background_title')
+								headerTitle: t('background_title'),
+								headerStyle: {
+									backgroundColor: colors.backgroundHeader,
+								}
 							}}
 						/>
 					</Stack.Navigator>

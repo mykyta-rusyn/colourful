@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import Animated, {FadeIn, FadeOut} from 'react-native-reanimated';
+import {FadeIn, FadeOut} from 'react-native-reanimated';
 
 import {removeBackgroundImage} from '../../actions';
 import {styles, useTheme} from '../../theme';
@@ -27,29 +27,16 @@ export const Background: React.FC<
 		removeBackgroundImage();
 	}, [changeBackgroundImage]);
 
-	if (backgroundImage !== undefined) {
-		return (
-			<AnimatedImageBackground
-				entering={FadeIn}
-				exiting={FadeOut}
-				source={{uri: backgroundImage}}
-				style={style}
-				onError={onError}
-				onLayout={props.onLayout}
-			>
-				{children}
-			</AnimatedImageBackground>
-		);
-	}
-
 	return (
-		<Animated.View
+		<AnimatedImageBackground
 			entering={FadeIn}
 			exiting={FadeOut}
+			source={{uri: backgroundImage}}
 			style={style}
+			onError={onError}
 			onLayout={props.onLayout}
 		>
 			{children}
-		</Animated.View>
+		</AnimatedImageBackground>
 	);
 });
