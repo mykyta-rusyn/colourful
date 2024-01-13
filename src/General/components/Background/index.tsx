@@ -1,6 +1,7 @@
 import React from 'react';
 import {ImageBackground, StyleSheet, View} from 'react-native';
 
+import {removeBackgroundImage} from '../../actions';
 import {styles, useTheme} from '../../theme';
 
 type Props = {
@@ -11,7 +12,7 @@ export const Background: React.FC<
 	React.PropsWithChildren<Props>
 > = React.memo((props) => {
 	const children = React.useMemo(() => props.children, [props.children]);
-	const {backgroundImage, colors} = useTheme();
+	const {backgroundImage, colors, changeBackgroundImage} = useTheme();
 	const style = React.useMemo(() => (
 		StyleSheet.flatten([
 			styles.flex1,
@@ -19,11 +20,17 @@ export const Background: React.FC<
 		])
 	), [colors.background]);
 
+	const onError = React.useCallback(() => {
+		changeBackgroundImage();
+		removeBackgroundImage();
+	}, [changeBackgroundImage]);
+
 	if (backgroundImage !== undefined) {
 		return (
 			<ImageBackground
 				source={{uri: backgroundImage}}
 				style={style}
+				onError={onError}
 				onLayout={props.onLayout}
 			>
 				{children}

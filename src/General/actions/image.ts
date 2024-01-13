@@ -1,10 +1,6 @@
-import {Alert} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {ImageType, SavedImages} from '../domain';
-import {localize} from '../localization';
-
-import {getPermissionsAsync, requestPermissionsAsync, saveToLibraryAsync} from 'expo-media-library';
 
 const key = 'colourful_images';
 const iconsKeys = {
@@ -17,26 +13,6 @@ export async function saveImages(
 	images: [string, string],
 	type: ImageType
 ): Promise<boolean> {
-	const permission1 = await getPermissionsAsync();
-
-	if (!permission1.granted) {
-		const permission2 = await requestPermissionsAsync();
-
-		if (!permission2.granted) {
-			Alert.alert(
-				localize('directory_permission_title'),
-				localize('directory_permission_description')
-			);
-
-			return false;
-		}
-	}
-
-	await Promise.all([
-		saveToLibraryAsync(images[0]),
-		saveToLibraryAsync(images[1])
-	]);
-
 	const items = JSON.stringify(type === 'language' ? {
 		en: images[0],
 		uk: images[1]
@@ -48,6 +24,10 @@ export async function saveImages(
 	await AsyncStorage.setItem(iconsKeys[type], items);
 
 	return true;
+}
+
+export async function removeImages(type: ImageType): Promise<void> {
+	return await AsyncStorage.removeItem(iconsKeys[type]);
 }
 
 export async function loadImages(
@@ -70,25 +50,13 @@ export async function loadImages(
 }
 
 export async function saveBackgroundImage(image: string): Promise<boolean> {
-	const permission1 = await getPermissionsAsync();
-
-	if (!permission1.granted) {
-		const permission2 = await requestPermissionsAsync();
-
-		if (!permission2.granted) {
-			Alert.alert(
-				localize('directory_permission_title'),
-				localize('directory_permission_description')
-			);
-
-			return false;
-		}
-	}
-
-	await saveToLibraryAsync(image);
 	await AsyncStorage.setItem(iconsKeys.background, image);
 
 	return true;
+}
+
+export async function removeBackgroundImage(): Promise<void> {
+	return await AsyncStorage.removeItem(iconsKeys.background);
 }
 
 export async function loadBackgroundImage(

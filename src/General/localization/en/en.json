@@ -47,6 +47,6 @@
 	"background_button": "Tap me to choose your image as a background for the whole app",
 	"background_description": "Tap the button to choose what image you want to see as background for the whole app",
 
-	"directory_permission_title": "Unable to save icons",
-	"directory_permission_description": "Grant permissions to save your icons"
+	"directory_permission_title": "Unable to access your library",
+	"directory_permission_description": "Grant permissions to pick and save your images"
 }
