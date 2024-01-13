@@ -11,7 +11,8 @@ import ColorPicker, {HueSlider, OpacitySlider, Panel1, PreviewText, returnedResu
 
 type Props = {
 	initialColor: string | undefined | null;
-	onSave: (color: string) => void
+	onSave: (color: string) => void;
+	onDiscard: () => void
 }
 
 export const ColorModal: React.FC<Props> = React.memo((props) => {
@@ -67,7 +68,7 @@ export const ColorModal: React.FC<Props> = React.memo((props) => {
 					/>
 					<Button
 						title={t('discard')}
-						onPress={onSaveModal}
+						onPress={props.onDiscard}
 					/>
 				</View>
 

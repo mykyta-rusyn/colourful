@@ -57,7 +57,9 @@ export const ImagesScreen: React.FC<ImagesScreenProp> = () => {
 				light: images[1]
 			}
 		});
-	}, [images, type, changeImages]);
+
+		onRemoveImages();
+	}, [images, type, changeImages, onRemoveImages]);
 
 	return (
 		<View style={styles.root}>

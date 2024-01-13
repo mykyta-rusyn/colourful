@@ -18,11 +18,14 @@ export const ColorsScreen: React.FC<ColorsScreenProps> = ({}) => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [selectedColor]);
 
+	const onDiscard = React.useCallback(() => setSelectedcolor(undefined), []);
+
 	return (
 		<View style={styles.root}>
 			<ColorModal
 				initialColor={selectedColor?.color}
-				onSave={onUpdateColor} 
+				onDiscard={onDiscard}
+				onSave={onUpdateColor}
 			/>
 			<View style={styles.colorButtons}>
 				{Object.keys(colors).map((key) => {
