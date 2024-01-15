@@ -1,5 +1,7 @@
-import {globalReducer} from './slices';
+import {fontReducer, imageReducer, themeReducer} from './slices';
 
 export const reducer = {
-	globalReducer,
+	fontReducer,
+	imageReducer,
+	themeReducer
 };

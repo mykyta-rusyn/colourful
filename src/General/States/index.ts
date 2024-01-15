@@ -1,3 +1,3 @@
 export * from './reduxHooks';
-export {globalState} from './slices';
+export {fontState, imageState, themeState} from './slices';
 export {store} from './store';

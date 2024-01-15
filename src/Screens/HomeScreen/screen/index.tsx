@@ -5,11 +5,13 @@ import {HomeScreenProps} from '../../ScreenParams';
 
 import {styles} from './styles';
 
-import {Button, clearStorage, useLocal, useTheme} from '@colourful/general';
+import {Button, clearStorage, useFont, useImages, useLocal, useTheme} from '@colourful/general';
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
 	const {t} = useLocal();
-	const {changeImages, changeBackgroundImage, changeColor} = useTheme();
+	const {changeColor} = useTheme();
+	const {changeBackgroundImage, changeImages} = useImages();
+	const {setFontFamily} = useFont();
 
 	function goToColors() {
 		navigation.navigate('ColorsScreen');
@@ -32,6 +34,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
 		changeImages();
 		changeColor();
 		changeBackgroundImage();
+		setFontFamily();
 	}
 
 	return (

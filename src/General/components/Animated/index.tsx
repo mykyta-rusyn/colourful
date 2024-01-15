@@ -6,4 +6,3 @@ export const AnimatedTouchableOpacity
 
 export const AnimatedImageBackground
 	= Animated.createAnimatedComponent(ImageBackground);
-	

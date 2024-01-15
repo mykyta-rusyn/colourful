@@ -5,10 +5,10 @@ import {FontsScreenProps} from '../../ScreenParams';
 
 import {styles} from './styles';
 
-import {Button, Description, Theme, useLocal, useTheme} from '@colourful/general';
+import {Button, Description, Theme, useFont, useLocal} from '@colourful/general';
 
 export const FontsScreen: React.FC<FontsScreenProps> = () => {
-	const {fontFamily, toggleFontFamily} = useTheme();
+	const {fontFamily, toggleFontFamily} = useFont();
 	const {t} = useLocal();
 
 	const Fonts = React.useCallback(() => (

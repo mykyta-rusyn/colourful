@@ -1,39 +1,26 @@
 import React from 'react';
 import {Image, TouchableOpacity} from 'react-native';
 
-import {removeImages, saveLang} from '../../actions';
+import {saveLang} from '../../actions';
+import {useImages, useTheme} from '../../hooks';
 import {useLocal} from '../../localization';
-import {useTheme} from '../../theme';
 
-import {images} from './res';
 import {styles} from './sharedStyles';
-
-import {globalState, useAppSelector} from '@colourful/states';
 
 export const LanguageButton: React.FC = () => {
 	const {currentLang, changeLanguage} = useLocal();
-	const {colors, changeImages} = useTheme();
-	const image = useAppSelector(globalState.selectors.localizationImage);
-	const isEng = currentLang === 'en';
-	const selectedImage
-		= isEng
-			? image
-				? {uri: image.en}
-				: images.en
-			: image
-				? {uri: image.uk}
-				: images.uk;
+	const {colors} = useTheme();
+	const {localizationImage: image, changeImages} = useImages();
 
 	const toggleLanguage = React.useCallback(() => {
-		const newLanguage = isEng ? 'uk' : 'en';
+		const newLanguage = currentLang === 'en' ? 'uk' : 'en';
 
 		changeLanguage(newLanguage);
 		saveLang(newLanguage);
-	}, [changeLanguage, isEng]);
+	}, [changeLanguage, currentLang]);
 
 	const onError = React.useCallback(() => {
-		changeImages();
-		removeImages('language');
+		changeImages('language');
 	}, [changeImages]);
 
 	return (
@@ -42,7 +29,7 @@ export const LanguageButton: React.FC = () => {
 			onPress={toggleLanguage}
 		>
 			<Image
-				source={selectedImage}
+				source={{uri: image[currentLang]}}
 				style={styles.image}
 				tintColor={colors.languageSwitch ?? undefined}
 				onError={onError}

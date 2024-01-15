@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {ImageType, SavedImages} from '../domain';
 
-const key = 'colourful_images';
+const key = 'colourful_app_images';
 const iconsKeys = {
 	background: `${key}_background`,
 	theme: `${key}_theme`,
@@ -26,27 +26,42 @@ export async function saveImages(
 	return true;
 }
 
-export async function removeImages(type: ImageType): Promise<void> {
-	return await AsyncStorage.removeItem(iconsKeys[type]);
+export async function removeImages(type?: ImageType): Promise<void[]> {
+	const promises: Promise<void>[] = [];
+
+	if (!type) {
+		promises.push(
+			AsyncStorage.removeItem(iconsKeys.language),
+			AsyncStorage.removeItem(iconsKeys.theme),
+		);
+	} else {
+		promises.push(AsyncStorage.removeItem(iconsKeys[type]));
+	}
+
+	return await Promise.all(promises);
 }
 
 export async function loadImages(
 	callback: (images: SavedImages) => void
 ): Promise<void> {
-	const localizeImages = await AsyncStorage.getItem(iconsKeys.language);
-	const themeImages = await AsyncStorage.getItem(iconsKeys.theme);
+	const images = await Promise.all([
+		AsyncStorage.getItem(iconsKeys.language),
+		AsyncStorage.getItem(iconsKeys.theme)
+	]);
 
-	const images: SavedImages = {};
-
-	if (localizeImages) {
-		images.localize = JSON.parse(localizeImages);
+	if (images[0]) {
+		callback({
+			flow: 'localize',
+			localizationImage: JSON.parse(images[0])
+		});
 	}
 
-	if (themeImages) {
-		images.theme = JSON.parse(themeImages);
+	if (images[1]) {
+		callback({
+			flow: 'theme',
+			themeImage: JSON.parse(images[1])
+		});
 	}
-
-	callback(images);
 }
 
 export async function saveBackgroundImage(image: string): Promise<boolean> {

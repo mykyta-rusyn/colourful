@@ -2,7 +2,7 @@ import React from 'react';
 import {DefaultTheme, NavigationContainer, Theme as NavigationTheme} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import {Background, HeaderButtons, loadBackgroundImage, loadImages, loadSavedLang, loadTheme, Theme, useLocal, useTheme} from '@colourful/general';
+import {Background, HeaderButtons, loadBackgroundImage, loadImages, loadSavedFontFamily, loadSavedLang, loadTheme, Theme, useFont, useImages, useLocal, useTheme} from '@colourful/general';
 import {BackgroundScreen, ColorsScreen, FontsScreen, HomeScreen, ImagesScreen, NavigationParam} from '@colourful/screens';
 import {hideAsync} from 'expo-splash-screen';
 import i18n from 'i18next';
@@ -18,20 +18,16 @@ const navTheme: NavigationTheme = {
 
 export const Navigator: React.FC = () => {
 	const {t} = useLocal();
-	const {
-		activeFont,
-		backgroundImage,
-		changeBackgroundImage,
-		changeImages,
-		changeTheme,
-		colors,
-	} = useTheme();
+	const {changeTheme, colors} = useTheme();
+	const {activeFont, setFontFamily} = useFont();
+	const {backgroundImage, changeBackgroundImage, changeImages} = useImages();
 	const [isLoaded, setIsLoaded] = React.useState(false);
 	const [isLayout, setIsLayout] = React.useState(false);
 	const [isFontLoaded, setIsFontLoaded] = React.useState(false);
 
 	React.useEffect(() => {
 		Promise.all([
+			loadSavedFontFamily(setFontFamily),
 			Theme.loadFonts(setIsFontLoaded),
 			loadSavedLang(i18n.changeLanguage),
 			loadTheme(changeTheme),

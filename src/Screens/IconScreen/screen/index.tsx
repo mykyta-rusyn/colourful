@@ -5,11 +5,11 @@ import {ImagesScreenProp} from '../../ScreenParams';
 
 import {styles} from './styles';
 
-import {Button, Description, ImagePicker, ImageType, LocalizationKey, saveImages, useLocal, useTheme} from '@colourful/general';
+import {Button, Description, ImagePicker, ImageType, LocalizationKey, saveImages, useImages, useLocal} from '@colourful/general';
 import {launchImageLibraryAsync, MediaTypeOptions} from 'expo-image-picker';
 
 export const ImagesScreen: React.FC<ImagesScreenProp> = () => {
-	const {changeImages} = useTheme();
+	const {changeImages} = useImages();
 	const [type, setType] = React.useState<ImageType>('language');
 	const anotherType = React.useMemo<ImageType>(() => (
 		type === 'language' ? 'theme' : 'language'
@@ -47,12 +47,14 @@ export const ImagesScreen: React.FC<ImagesScreenProp> = () => {
 	const onSaveImages = React.useCallback(async () => {
 		await saveImages(images as [string, string], type);
 		changeImages(type === 'language' ? {
-			localize: {
+			flow: 'localize',
+			localizationImage: {
 				en: images[0],
 				uk: images[1]
 			}
 		} : {
-			theme: {
+			flow: 'theme',
+			themeImage: {
 				dark: images[0],
 				light: images[1]
 			}
