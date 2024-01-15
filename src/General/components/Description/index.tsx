@@ -1,8 +1,8 @@
 import React from 'react';
 import {StyleSheet, Text, TextStyle} from 'react-native';
 
+import {useFont, useTheme} from '../../hooks';
 import {LocalizationKey, useLocal} from '../../localization';
-import {useTheme} from '../../theme';
 
 import {styles} from './styles';
 
@@ -11,14 +11,15 @@ type Props = {
 }
 
 export const Description: React.FC<Props> = React.memo((props) => {
-	const {activeFont: activeFonts, colors} = useTheme();
+	const {colors} = useTheme();
+	const {activeFont} = useFont();
 	const {t} = useLocal();
 	const descriptionStyle = React.useMemo(() => (
 		StyleSheet.flatten<TextStyle>([styles.descriptionText, {
 			color: colors.textDescription,
-			fontFamily: activeFonts.Medium
+			fontFamily: activeFont.Medium
 		}])
-	), [activeFonts, colors]);
+	), [activeFont, colors]);
 
 	return (
 		<Text style={descriptionStyle}>

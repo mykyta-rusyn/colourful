@@ -4,8 +4,8 @@ import {ThemeType} from '../domain';
 
 const themeKey = 'colourful_app_theme';
 
-export function saveTheme(theme: ThemeType): Promise<void> {
-	return AsyncStorage.setItem(themeKey, theme);
+export async function saveTheme(theme: ThemeType): Promise<void> {
+	return await AsyncStorage.setItem(themeKey, theme);
 }
 
 export async function loadTheme(

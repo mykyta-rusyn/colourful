@@ -2,31 +2,17 @@ import React from 'react';
 import {Image} from 'react-native';
 import {FadeIn, FadeOut} from 'react-native-reanimated';
 
-import {removeImages} from '../../actions';
-import {useTheme} from '../../theme';
+import {useImages, useTheme} from '../../hooks';
 import {AnimatedTouchableOpacity} from '../Animated';
 
-import {images} from './res';
 import {styles} from './sharedStyles';
 
-import {globalState, useAppSelector} from '@colourful/states';
-
 export const ThemeButton: React.FC = () => {
-	const {colors, theme, toggleTheme, changeImages} = useTheme();
-	const image = useAppSelector(globalState.selectors.themeImage);
-	const isDark = theme === 'dark';
-	const selectedImage
-		= isDark
-			? image
-				? {uri: image.dark}
-				: images.dark
-			: image
-				? {uri: image.light}
-				: images.light;
+	const {colors, theme, toggleTheme} = useTheme();
+	const {themeImage: image, changeImages} = useImages();
 
 	const onError = React.useCallback(() => {
-		changeImages();
-		removeImages('theme');
+		changeImages('theme');
 	}, [changeImages]);
 
 	return (
@@ -38,7 +24,7 @@ export const ThemeButton: React.FC = () => {
 			onPress={toggleTheme}
 		>
 			<Image
-				source={selectedImage}
+				source={{uri: image[theme]}}
 				style={styles.image}
 				tintColor={colors.themeSwitch}
 				onError={onError}

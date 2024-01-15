@@ -3,6 +3,7 @@ import {Modal, View} from 'react-native';
 import Animated, {useAnimatedStyle, useSharedValue} from 'react-native-reanimated';
 
 import {useLocal} from '../../localization';
+import {Theme} from '../../theme';
 import {Button} from '../Button';
 
 import {styles} from './styles';
@@ -42,7 +43,7 @@ export const ColorModal: React.FC<Props> = React.memo((props) => {
 			animationType="slide"
 			visible={props.initialColor !== undefined}
 		>
-			<Animated.View style={[styles.root, backgroundColorStyle]}>
+			<Animated.View style={[Theme.styles.flex1Center, backgroundColorStyle]}>
 				<View style={styles.pickerContainer}>
 					<ColorPicker
 						boundedThumb

@@ -1,8 +1,11 @@
 import {ThemeType} from './Theme';
 
-export type SavedImages = {
-	localize?: LocalizationImage;
-	theme?: ThemeImage
+export type SavedImages = | {
+  flow: 'localize';
+  localizationImage: LocalizationImage
+} | {
+  flow: 'theme';
+  themeImage: ThemeImage
 }
 
 export type ImageType = 'language' | 'theme';

@@ -5,12 +5,12 @@ import {BackgroundScreenProps} from '../../ScreenParams';
 
 import {styles} from './styles';
 
-import {Button, Description, ImagePicker, saveBackgroundImage, Theme, useLocal, useTheme} from '@colourful/general';
+import {Button, Description, ImagePicker, saveBackgroundImage, Theme, useImages, useLocal} from '@colourful/general';
 import {launchImageLibraryAsync, MediaTypeOptions} from 'expo-image-picker';
 
 export const BackgroundScreen: React.FC<BackgroundScreenProps> = () => {
 	const [image, setImage] = React.useState<string>();
-	const {changeBackgroundImage} = useTheme();
+	const {changeBackgroundImage} = useImages();
 	const {t} = useLocal();
 
 	const pickImage = React.useCallback(async () => {

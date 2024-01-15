@@ -2,7 +2,7 @@ import React from 'react';
 import {ImageStyle, StyleSheet, View} from 'react-native';
 import Animated, {FadeIn, FadeOut} from 'react-native-reanimated';
 
-import {useTheme} from '../../theme';
+import {useTheme} from '../../hooks';
 import {Button} from '../Button';
 
 import {styles} from './styles';

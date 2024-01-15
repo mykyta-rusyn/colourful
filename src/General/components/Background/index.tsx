@@ -3,7 +3,8 @@ import {StyleSheet} from 'react-native';
 import {FadeIn, FadeOut} from 'react-native-reanimated';
 
 import {removeBackgroundImage} from '../../actions';
-import {styles, useTheme} from '../../theme';
+import {useImages, useTheme} from '../../hooks';
+import {Theme} from '../../theme';
 import {AnimatedImageBackground} from '../Animated';
 
 type Props = {
@@ -14,18 +15,23 @@ export const Background: React.FC<
 	React.PropsWithChildren<Props>
 > = React.memo((props) => {
 	const children = React.useMemo(() => props.children, [props.children]);
-	const {backgroundImage, colors, changeBackgroundImage} = useTheme();
+	const {colors} = useTheme();
+	const {backgroundImage, changeBackgroundImage} = useImages();
 	const style = React.useMemo(() => (
 		StyleSheet.flatten([
-			styles.flex1,
+			Theme.styles.flex1,
 			{backgroundColor: colors.background}
 		])
 	), [colors.background]);
 
 	const onError = React.useCallback(() => {
+		if (backgroundImage === '') {
+			return;
+		}
+		
 		changeBackgroundImage();
 		removeBackgroundImage();
-	}, [changeBackgroundImage]);
+	}, [backgroundImage, changeBackgroundImage]);
 
 	return (
 		<AnimatedImageBackground
