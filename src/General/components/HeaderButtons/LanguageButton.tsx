@@ -5,6 +5,7 @@ import {saveLang} from '../../actions';
 import {useImages, useTheme} from '../../hooks';
 import {useLocal} from '../../localization';
 
+import {images} from './res';
 import {styles} from './sharedStyles';
 
 export const LanguageButton: React.FC = () => {
