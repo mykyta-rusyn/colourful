@@ -1,19 +1,8 @@
-import {images} from './res';
 import {Actions, Selectors, State} from './types';
 
 import {createSlice} from '@reduxjs/toolkit';
 
-const initialState: State = {
-	backgroundImage: '',
-	localizationImage: {
-		en: images.en,
-		uk: images.uk
-	},
-	themeImage: {
-		dark: images.dark,
-		light: images.light
-	}
-};
+const initialState: State = {};
 
 const imageSlice = createSlice<State, Actions, 'imageSlice'>({
 	name: 'imageSlice',

@@ -5,11 +5,12 @@ import {FadeIn, FadeOut} from 'react-native-reanimated';
 import {useImages, useTheme} from '../../hooks';
 import {AnimatedTouchableOpacity} from '../Animated';
 
+import {images} from './res';
 import {styles} from './sharedStyles';
 
 export const ThemeButton: React.FC = () => {
 	const {colors, theme, toggleTheme} = useTheme();
-	const {themeImage: image, changeImages} = useImages();
+	const {themeImage, changeImages} = useImages();
 
 	const onError = React.useCallback(() => {
 		changeImages('theme');
@@ -24,9 +25,13 @@ export const ThemeButton: React.FC = () => {
 			onPress={toggleTheme}
 		>
 			<Image
-				source={{uri: image[theme]}}
+				source={
+					themeImage
+						? {uri: themeImage[theme]}
+						: images[theme]
+				}
 				style={styles.image}
-				tintColor={colors.themeSwitch}
+				tintColor={themeImage ? undefined : colors.themeSwitch}
 				onError={onError}
 			/>
 		</AnimatedTouchableOpacity>

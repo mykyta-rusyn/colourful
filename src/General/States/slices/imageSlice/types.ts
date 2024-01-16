@@ -3,9 +3,9 @@ import {RootState} from '../../store';
 import {ImageType, LocalizationImage, Payload, SavedImages, ThemeImage} from '@colourful/general';
 
 export type State = {
-  themeImage: ThemeImage;
-  localizationImage: LocalizationImage;
-  backgroundImage: string
+  themeImage?: ThemeImage;
+  localizationImage?: LocalizationImage;
+  backgroundImage?: string
 };
 
 export type Actions = {
@@ -14,7 +14,7 @@ export type Actions = {
 };
 
 export type Selectors = {
-  themeImage(state: RootState): ThemeImage;
-  localizationImage(state: RootState): LocalizationImage;
-  backgroundImage(state: RootState): string
+  themeImage(state: RootState): ThemeImage | undefined;
+  localizationImage(state: RootState): LocalizationImage | undefined;
+  backgroundImage(state: RootState): string | undefined
 }
