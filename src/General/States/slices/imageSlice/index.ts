@@ -1,4 +1,3 @@
-
 import {Actions, Selectors, State} from './types';
 
 import {createSlice} from '@reduxjs/toolkit';

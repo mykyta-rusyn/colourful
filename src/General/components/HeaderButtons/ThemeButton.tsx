@@ -5,7 +5,6 @@ import {FadeIn, FadeOut} from 'react-native-reanimated';
 import {useImages, useTheme} from '../../hooks';
 import {AnimatedTouchableOpacity} from '../Animated';
 
-import {images} from './res';
 import {styles} from './sharedStyles';
 
 export const ThemeButton: React.FC = () => {
