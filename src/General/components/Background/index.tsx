@@ -25,13 +25,9 @@ export const Background: React.FC<
 	), [colors.background]);
 
 	const onError = React.useCallback(() => {
-		if (backgroundImage === '') {
-			return;
-		}
-		
 		changeBackgroundImage();
 		removeBackgroundImage();
-	}, [backgroundImage, changeBackgroundImage]);
+	}, [changeBackgroundImage]);
 
 	return (
 		<AnimatedImageBackground

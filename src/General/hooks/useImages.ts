@@ -6,9 +6,9 @@ import {ImageType, LocalizationImage, SavedImages, ThemeImage} from '../domain';
 import {imageState, useAppDispatch, useAppSelector} from '@colourful/states';
 
 type Images = {
-  backgroundImage: string;
-  localizationImage: LocalizationImage;
-  themeImage: ThemeImage;
+  backgroundImage: string | undefined;
+  localizationImage: LocalizationImage | undefined;
+  themeImage: ThemeImage | undefined;
 	changeBackgroundImage: (image?: string) => void;
 	changeImages: (images?: SavedImages | ImageType) => void
 }
@@ -20,15 +20,21 @@ export const useImages = (): Images => {
 	const dispatch = useAppDispatch();
 
 	React.useEffect(() => {
-		saveBackgroundImage(backgroundImage);
+		if (backgroundImage) {
+			saveBackgroundImage(backgroundImage);
+		}
 	}, [backgroundImage]);
 
 	React.useEffect(() => {
-		saveImages([localizationImage.en, localizationImage.uk], 'language');
+		if (localizationImage) {
+			saveImages([localizationImage.en, localizationImage.uk], 'language');
+		}
 	}, [localizationImage]);
 
 	React.useEffect(() => {
-		saveImages([themeImage.dark, themeImage.light], 'theme');
+		if (themeImage) {
+			saveImages([themeImage.dark, themeImage.light], 'theme');
+		}
 	}, [themeImage]);
 
 	const changeBackgroundImage = React.useCallback((image?: string) => {

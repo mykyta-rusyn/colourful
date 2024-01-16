@@ -22,7 +22,7 @@ export const Navigator: React.FC = () => {
 	const {activeFont, setFontFamily} = useFont();
 	const {backgroundImage, changeBackgroundImage, changeImages} = useImages();
 	const [isLoaded, setIsLoaded] = React.useState(false);
-	const [isLayout, setIsLayout] = React.useState(false);
+	const [isLayout, setIsLayout] = React.useState(true);
 	const [isFontLoaded, setIsFontLoaded] = React.useState(false);
 
 	React.useEffect(() => {

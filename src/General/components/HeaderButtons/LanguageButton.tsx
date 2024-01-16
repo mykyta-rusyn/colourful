@@ -5,12 +5,13 @@ import {saveLang} from '../../actions';
 import {useImages, useTheme} from '../../hooks';
 import {useLocal} from '../../localization';
 
+import {images} from './res';
 import {styles} from './sharedStyles';
 
 export const LanguageButton: React.FC = () => {
 	const {currentLang, changeLanguage} = useLocal();
 	const {colors} = useTheme();
-	const {localizationImage: image, changeImages} = useImages();
+	const {localizationImage, changeImages} = useImages();
 
 	const toggleLanguage = React.useCallback(() => {
 		const newLanguage = currentLang === 'en' ? 'uk' : 'en';
@@ -29,9 +30,17 @@ export const LanguageButton: React.FC = () => {
 			onPress={toggleLanguage}
 		>
 			<Image
-				source={{uri: image[currentLang]}}
+				source={
+					localizationImage
+						? {uri: localizationImage[currentLang]}
+						: images[currentLang]
+				}
 				style={styles.image}
-				tintColor={colors.languageSwitch ?? undefined}
+				tintColor={
+					localizationImage
+						? undefined
+						: colors.languageSwitch ?? undefined
+				}
 				onError={onError}
 			/>
 		</TouchableOpacity>
