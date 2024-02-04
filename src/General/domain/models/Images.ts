@@ -1,14 +1,11 @@
 import {ThemeType} from './Theme';
 
-export type SavedImages = | {
-  flow: 'localize';
-  localizationImage: LocalizationImage
-} | {
-  flow: 'theme';
+export type SavedImages = {
+  localizationImage: LocalizationImage;
   themeImage: ThemeImage
 }
 
-export type ImageType = 'language' | 'theme';
+export type ImageType = 'localization' | 'theme';
 
 export type LocalizationImage = {
 	en: string;

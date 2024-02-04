@@ -2,9 +2,11 @@ import React from 'react';
 import {StyleSheet, Text, TextStyle, TouchableOpacity, ViewStyle} from 'react-native';
 
 import {FontWeightName} from '../../domain';
-import {useFont, useTheme} from '../../hooks';
 
 import {styles} from './styles';
+
+import {fontState, themeState} from '@colourful/state';
+import {observer} from 'mobx-react-lite';
 
 type Props = {
 	backgroundColor?: string;
@@ -15,9 +17,8 @@ type Props = {
 	onPress?: () => void
 }
 
-export const Button: React.FC<Props> = React.memo((props) => {
-	const {colors} = useTheme();
-	const {activeFont} = useFont();
+export const Button: React.FC<Props> = observer((props) => {
+	const colors = themeState.colors;
 
 	const rootStyle = React.useMemo(() => {
 		return StyleSheet.flatten<ViewStyle>([styles.root, {
@@ -32,8 +33,8 @@ export const Button: React.FC<Props> = React.memo((props) => {
 		width: '100%',
 		textAlign: 'center',
 		color: props.textColor ?? colors.textDescription,
-		fontFamily: props.fontFamily ?? activeFont.Regular
-	}), [activeFont, colors, props.fontFamily, props.textColor]);
+		fontFamily: props.fontFamily ?? fontState.font.Regular
+	}), [colors.textDescription, props.fontFamily, props.textColor]);
 
 	return (
 		<TouchableOpacity 

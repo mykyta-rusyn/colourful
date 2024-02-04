@@ -24,10 +24,10 @@
 	"modal_save": "Зберегти поточний колір",
 
 	"icons_title": "Змінити іконки",
-	"icons_toggle_language": "$t(icons_title) $t(language)",
+	"icons_toggle_localization": "$t(icons_title) $t(localization)",
 	"icons_toggle_theme": "$t(icons_title) $t(theme)",
 	"icons_description": "Виберіть зображення з бібліотеки вашого телефона",
-	"icons_description_language": "$t(icons_description) для іконок $t(language)",
+	"icons_description_localization": "$t(icons_description) для іконок $t(localization)",
 	"icons_description_theme": "$t(icons_description) для іконок $t(theme)",
 	"icons": "{{take}} зображення для іконок {{iconType}} {{type}}",
 	"icons_save": "Зберегти",
@@ -36,7 +36,7 @@
 	"uk": "української",
 	"take": "Зробити",
 	"retake": "Перезняти",
-	"language": "мови",
+	"localization": "мови",
 	"theme": "теми",
 
 	"fonts_title": "Змінити шрифт",

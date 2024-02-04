@@ -16,11 +16,11 @@ const fontsToLoad: FontToLoad = {
 	}
 };
 
-export async function loadFonts(callback: (value: boolean) => void): Promise<void> {
+export async function loadFonts(): Promise<[void, void]> {
 	return await Promise.all([
 		loadAsync(fontsToLoad.Oswald),
 		loadAsync(fontsToLoad.Roboto),
-	]).then(() => callback(true));
+	]);
 }
 
 export const fonts: Fonts = {

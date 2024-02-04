@@ -17,16 +17,16 @@
     "target": "esnext",
     "paths": {
       "@colourful/general": [
-        "./src/General"
+        "./src/general"
       ],
       "@colourful/navigation": [
-        "./src/Navigation"
+        "./src/main/Navigation"
       ],
       "@colourful/screens": [
-        "./src/Screens"
+        "./src/main/Screens"
       ],
-      "@colourful/states": [
-        "./src/General/States"
+      "@colourful/state": [
+        "./src/general/State"
       ]
     },
     "types": [

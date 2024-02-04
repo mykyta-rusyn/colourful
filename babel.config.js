@@ -9,10 +9,10 @@ module.exports = function(api) {
 				{
 					root: ['./src'],
 					alias: {
-						'@colourful/general': './src/General',
-						'@colourful/navigation': './src/Navigation',
-						'@colourful/screens': './src/Screens',
-						'@colourful/states': './src/General/States',
+						'@colourful/general': './src/general',
+						'@colourful/navigation': './src/main/Navigation',
+						'@colourful/screens': './src/main/Screens',
+						'@colourful/state': './src/general/State'
 					},
 				},
 			],

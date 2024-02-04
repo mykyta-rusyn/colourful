@@ -1,11 +1,12 @@
 import React from 'react';
-import {ImageStyle, StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import Animated, {FadeIn, FadeOut} from 'react-native-reanimated';
 
-import {useTheme} from '../../hooks';
 import {Button} from '../Button';
 
 import {styles} from './styles';
+
+import {themeState} from '@colourful/state';
 
 type Props = {
 	title: string;
@@ -15,13 +16,6 @@ type Props = {
 }
 
 export const ImagePicker: React.FC<Props> = (props) => {
-	const {colors} = useTheme();
-	const imageStyle = React.useMemo(() => (
-		StyleSheet.flatten<ImageStyle>([styles.image, {
-			borderColor: colors.border
-		}])
-	), [colors.border]);
-	const isImage = React.useMemo(() => props.image !== undefined, [props.image]);
 
 	function onPress() {
 		props.pickImage(props.index);
@@ -33,12 +27,15 @@ export const ImagePicker: React.FC<Props> = (props) => {
 				title={props.title}
 				onPress={onPress}
 			/>
-			{isImage ? (
+			{props.image !== undefined ? (
 				<Animated.Image
 					entering={FadeIn}
 					exiting={FadeOut}
 					source={{uri: props.image}}
-					style={imageStyle}
+					style={[
+						styles.image,
+						{borderColor: themeState.colors.border}
+					]}
 				/>
 			) : null}
 		</View>

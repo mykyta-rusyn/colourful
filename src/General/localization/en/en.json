@@ -24,10 +24,10 @@
 	"modal_save": "Save current color",
 
 	"icons_title": "Change icons",
-	"icons_toggle_language": "Change the $t(language) icons",
+	"icons_toggle_localization": "Change the $t(localization) icons",
 	"icons_toggle_theme": "Change the $t(theme) icons",
 	"icons_description": "Choose pictures from your phone library",
-	"icons_description_language": "$t(icons_description) for $t(language) icons",
+	"icons_description_localization": "$t(icons_description) for $t(localization) icons",
 	"icons_description_theme": "$t(icons_description) for $t(theme) icons",
 	"icons": "{{take}} a picture for the {{iconType}} {{type}} icon",
 	"icons_save": "Save",
@@ -36,7 +36,7 @@
 	"uk": "Ukrainian",
 	"take": "Take",
 	"retake": "Retake",
-	"language": "language",
+	"localization": "language",
 	"theme": "theme",
 
 	"fonts_title": "Change font",

@@ -2,7 +2,7 @@ import React from 'react';
 import {Modal, View} from 'react-native';
 import Animated, {useAnimatedStyle, useSharedValue} from 'react-native-reanimated';
 
-import {useLocal} from '../../localization';
+import {localize} from '../../localization';
 import {Theme} from '../../theme';
 import {Button} from '../Button';
 
@@ -16,21 +16,20 @@ type Props = {
 	onDiscard: () => void
 }
 
-export const ColorModal: React.FC<Props> = React.memo((props) => {
-	const {t} = useLocal();
+export const ColorModal: React.FC<Props> = (props) => {
 	const selectedColor = useSharedValue(props.initialColor ?? '#FFFFFF');
 	
 	const backgroundColorStyle = useAnimatedStyle(() => ({
 		backgroundColor: selectedColor.value,
 	}));
 
-	const onSaveModal = React.useCallback(() => {
+	function onSaveModal() {
 		props.onSave(selectedColor.value);
-	}, [props, selectedColor]);
+	}
 
-	const onChange = React.useCallback((colors: returnedResults) => {
+	function onChange(colors: returnedResults) {
 		selectedColor.value = colors.hex;
-	}, [selectedColor]);
+	}
 
 	React.useEffect(() => {
 		if (props.initialColor) {
@@ -64,11 +63,11 @@ export const ColorModal: React.FC<Props> = React.memo((props) => {
 
 				<View style={styles.buttons}>
 					<Button
-						title={t('modal_save')}
+						title={localize('modal_save')}
 						onPress={onSaveModal}
 					/>
 					<Button
-						title={t('discard')}
+						title={localize('discard')}
 						onPress={props.onDiscard}
 					/>
 				</View>
@@ -76,4 +75,4 @@ export const ColorModal: React.FC<Props> = React.memo((props) => {
 			</Animated.View>
 		</Modal>
 	);
-});
+};
