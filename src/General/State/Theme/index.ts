@@ -4,9 +4,7 @@ import {ChangeColor, ThemeColors, ThemeType} from '../../domain';
 
 import {loadTheme, saveTheme} from './actions';
 
-import {action, computed, makeObservable, observable} from 'mobx';
-
-let loaded = false;
+import {action, computed, makeObservable, observable, runInAction} from 'mobx';
 
 type State = {
   theme: ThemeType;
@@ -43,7 +41,7 @@ const initialState: State = {
 
 class ThemeState {
 	private _colors: Record<ThemeType, ThemeColors> = initialState.colors;
-	theme: ThemeType = initialState.theme;
+	public theme: ThemeType = initialState.theme;
 
 	public get colors(): ThemeColors {
 		return this._colors[this.theme];
@@ -59,23 +57,19 @@ class ThemeState {
 		});
 
 		loadTheme().then((theme) => {
-			if (theme !== undefined && theme !== this.theme) {
-				this.toggleTheme();
-				loaded = true;
+			if (theme !== null && theme !== this.theme) {
+				runInAction(() => (this.theme = theme as ThemeType));
 			}
 		});
 	}
 	
-	async toggleTheme() {
-		console.log('first', this.theme);
+	public async toggleTheme() {
 		this.theme = this.theme === 'dark' ? 'light' : 'dark';
-		console.log('w', this.theme);
-		if (loaded) {
-			await saveTheme(this.theme);
-		}
+		
+		saveTheme(themeState.theme);
 	}
 
-	changeColor(options?: ChangeColor) {
+	public changeColor(options?: ChangeColor) {
 		if (options === undefined) {
 			this._colors = initialState.colors;
 		} else {

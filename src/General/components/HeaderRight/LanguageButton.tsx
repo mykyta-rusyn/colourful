@@ -2,13 +2,13 @@ import React from 'react';
 import {Image, TouchableOpacity} from 'react-native';
 
 import {changeLang, Languages} from '../../localization';
+import {observer} from '../../utils';
 
 import {defaultImages} from './res';
 import {styles} from './sharedStyles';
 
 import {imageState, themeState} from '@colourful/state';
 import i18next from 'i18next';
-import {observer} from 'mobx-react-lite';
 
 export const LanguageButton: React.FC = observer(() => {
 	const language = i18next.language as Languages;

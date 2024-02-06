@@ -7,7 +7,7 @@ import {NavigationParam} from './ScreenParams';
 import {HeaderRight, localize} from '@colourful/general';
 import {BackgroundScreen, ColorsScreen, FontsScreen, HomeScreen, ImagesScreen} from '@colourful/screens';
 import {fontState, imageState, themeState} from '@colourful/state';
-import {Observer} from 'mobx-react-lite';
+import {Observer} from 'mobx-react';
 
 const Stack = createStackNavigator<NavigationParam>();
 const navTheme: NavigationTheme = {
@@ -25,71 +25,71 @@ export class Navigator extends React.Component {
 		const colors = themeState.colors;
 
 		return (
-			<Stack.Navigator
-				screenOptions={{
-					headerTitleStyle: {
-						color: colors.textHeader,
-						fontFamily: font.Bold
-					},
-					headerStyle: {
-						backgroundColor: backgroundImage ? 'transparent' : colors.backgroundHeader,
-						shadowColor: backgroundImage ? 'transparent' : undefined,
-					},
-					cardStyle: {
-						backgroundColor: backgroundImage ? 'transparent' : colors.background,
-					},
-					headerRight: HeaderRight,
-				}}
-			>
-				<Stack.Screen
-					component={HomeScreen}
-					name='Home'
-					options={{
-						headerTitle: localize('home_title'),
-					}}
-				/>
-				<Stack.Screen
-					component={ColorsScreen}
-					name='Colors'
-					options={{
-						headerTitle: localize('color_title')
-					}}
-				/>
-				<Stack.Screen
-					component={ImagesScreen}
-					name='Images'
-					options={{
-						headerTitle: localize('icons_title')
-					}}
-				/>
-				<Stack.Screen
-					component={FontsScreen}
-					name='Fonts'
-					options={{
-						headerTitle: localize('fonts_title')
-					}}
-				/>
-				<Stack.Screen
-					component={BackgroundScreen}
-					name='Background'
-					options={{
-						headerTitle: localize('background_title'),
+			<NavigationContainer theme={navTheme}>
+				<Stack.Navigator
+					screenOptions={{
+						headerTitleStyle: {
+							color: colors.textHeader,
+							fontFamily: font.Bold
+						},
 						headerStyle: {
-							backgroundColor: colors.backgroundHeader,
-						}
+							backgroundColor: backgroundImage ? 'transparent' : colors.backgroundHeader,
+							shadowColor: backgroundImage ? 'transparent' : undefined,
+						},
+						cardStyle: {
+							backgroundColor: backgroundImage ? 'transparent' : colors.background,
+						},
+						headerRight: HeaderRight,
 					}}
-				/>
-			</Stack.Navigator>
+				>
+					<Stack.Screen
+						component={HomeScreen}
+						name='Home'
+						options={{
+							headerTitle: localize('home_title'),
+						}}
+					/>
+					<Stack.Screen
+						component={ColorsScreen}
+						name='Colors'
+						options={{
+							headerTitle: localize('color_title')
+						}}
+					/>
+					<Stack.Screen
+						component={ImagesScreen}
+						name='Images'
+						options={{
+							headerTitle: localize('icons_title')
+						}}
+					/>
+					<Stack.Screen
+						component={FontsScreen}
+						name='Fonts'
+						options={{
+							headerTitle: localize('fonts_title')
+						}}
+					/>
+					<Stack.Screen
+						component={BackgroundScreen}
+						name='Background'
+						options={{
+							headerTitle: localize('background_title'),
+							headerStyle: {
+								backgroundColor: colors.backgroundHeader,
+							}
+						}}
+					/>
+				</Stack.Navigator>
+			</NavigationContainer>
 		);
 	};
 
 	render(): React.ReactNode {
 		return (
-			<NavigationContainer theme={navTheme}>
-				<Observer>
-					{this._renderNavigator}
-				</Observer>
-			</NavigationContainer>
+			<Observer>
+				{this._renderNavigator}
+			</Observer>
 		);
 	}
 }

@@ -40,7 +40,7 @@
 	"theme": "theme",
 
 	"fonts_title": "Change font",
-	"fonts_toggle": "Tap me to change the font",
+	"fonts_toggle": "Tap me!",
 	"fonts_description": "Tap the button to change the current font to another",
 
 	"background_title": "Change backroung image",

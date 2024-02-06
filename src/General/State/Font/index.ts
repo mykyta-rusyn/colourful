@@ -3,9 +3,7 @@ import {Theme} from '../../theme';
 
 import {loadFontFamily, saveFontFamily} from './actions';
 
-import {action, autorun, computed, makeObservable, observable} from 'mobx';
-
-let loaded = false;
+import {action, computed, makeObservable, observable, runInAction} from 'mobx';
 
 class FontState {
 	fontFamily: FontFamily = 'Oswald';
@@ -18,31 +16,25 @@ class FontState {
 		makeObservable(this, {
 			fontFamily: observable,
 			font: computed,
-			changeFontFamily: action,
+			removeFontFamily: action,
 			toggleFontFamily: action
 		});
 
 		loadFontFamily().then((fontFamily) => {
 			if (fontFamily !== null) {
-				this.changeFontFamily(fontFamily as FontFamily);
-				loaded = true;
+				runInAction(() => this.fontFamily = fontFamily as FontFamily);
 			}
 		});
 	}
 
 	toggleFontFamily(): void {
 		this.fontFamily = this.fontFamily === 'Oswald' ? 'Roboto' : 'Oswald';
+		saveFontFamily(fontState.fontFamily);
 	}
 
-	changeFontFamily(fontFamily?: FontFamily): void {
-		this.fontFamily = fontFamily ?? 'Oswald';
+	removeFontFamily(): void {
+		this.fontFamily = 'Oswald';
 	}
 }
 
 export const fontState = new FontState();
-
-autorun(() => {
-	if (loaded) {
-		saveFontFamily(fontState.fontFamily);
-	}
-});

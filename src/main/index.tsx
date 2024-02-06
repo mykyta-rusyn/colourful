@@ -7,7 +7,7 @@ import {Navigator} from '@colourful/navigation';
 import {imageState, themeState} from '@colourful/state';
 import {hideAsync} from 'expo-splash-screen';
 import i18next from 'i18next';
-import {Observer} from 'mobx-react-lite';
+import {Observer} from 'mobx-react';
 
 type State = {
 	layout: boolean;
@@ -87,7 +87,6 @@ export class Init extends React.Component<unknown, State> {
 	};
 
 	render(): React.ReactNode {
-
 		return (
 			<Observer>
 				{this._renderContent}

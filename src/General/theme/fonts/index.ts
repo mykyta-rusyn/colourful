@@ -23,7 +23,7 @@ export async function loadFonts(): Promise<[void, void]> {
 	]);
 }
 
-export const fonts: Fonts = {
+export const availableFonts: Fonts = {
 	Oswald: {
 		Bold: 'Oswald-Bold',
 		Light: 'Oswald-Light',

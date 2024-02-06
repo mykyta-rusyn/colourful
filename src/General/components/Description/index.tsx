@@ -6,7 +6,7 @@ import {LocalizationKey, localize} from '../../localization';
 import {styles} from './styles';
 
 import {fontState, themeState} from '@colourful/state';
-import {observer} from 'mobx-react-lite';
+import {observer} from 'mobx-react';
 
 type Props = {
 	descriptionKey: LocalizationKey

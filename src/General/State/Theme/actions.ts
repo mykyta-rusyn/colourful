@@ -8,8 +8,6 @@ export async function saveTheme(theme: ThemeType): Promise<void> {
 	return await AsyncStorage.setItem(themeKey, theme);
 }
 
-export async function loadTheme(): Promise<string | undefined> {
-	const theme = await AsyncStorage.getItem(themeKey);
-
-	return theme ?? undefined;
+export async function loadTheme(): Promise<string | null> {
+	return await AsyncStorage.getItem(themeKey);
 }

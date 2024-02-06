@@ -1,5 +1,5 @@
 import {
-	fonts,
+	availableFonts,
 	loadFonts
 } from './fonts';
 import {
@@ -8,7 +8,7 @@ import {
 } from './styles';
 
 export const Theme = {
-	fonts,
+	fonts: availableFonts,
 	loadFonts,
 	styles,
 	windowSize

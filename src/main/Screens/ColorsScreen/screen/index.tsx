@@ -7,7 +7,7 @@ import {styles} from './styles';
 import {Button, ChangeColor, ColorModal, Description, localize, ThemeColors, ThemeColorsKey} from '@colourful/general';
 import {NavigationParam} from '@colourful/navigation';
 import {themeState} from '@colourful/state';
-import {Observer} from 'mobx-react-lite';
+import {Observer} from 'mobx-react';
 
 type Props = StackScreenProps<NavigationParam, 'Colors'>
 

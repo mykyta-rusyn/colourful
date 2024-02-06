@@ -60,11 +60,11 @@ export class HomeScreen extends React.Component<Props> {
 
 	private readonly _removeData = async () => {
 		await clearStorage();
-		fontState.changeFontFamily();
+		fontState.removeFontFamily();
 		imageState.changeBackgroundImage();
 		imageState.changeLocalizationImages();
 		imageState.changeThemeImages();
 		themeState.changeColor();
-		fontState.changeFontFamily();
+		fontState.removeFontFamily();
 	};
 }

@@ -2,14 +2,12 @@ import {LocalizationImage, ThemeImage} from '../../domain';
 
 import {loadBackgroundImage, loadImages, removeBackgroundImage, removeImages, saveBackgroundImage, saveLocalizationImages, saveThemeImages} from './actions';
 
-import {action, makeObservable, observable} from 'mobx';
-
-let loaded = false;
+import {action, makeObservable, observable, runInAction} from 'mobx';
 
 class ImageState {
-	themeImages?: ThemeImage = undefined;
-	localizationImages?: LocalizationImage = undefined;
-	backgroundImage?: string = undefined;
+	public themeImages?: ThemeImage = undefined;
+	public localizationImages?: LocalizationImage = undefined;
+	public backgroundImage?: string = undefined;
 
 	constructor() {
 		makeObservable(this, {
@@ -30,55 +28,52 @@ class ImageState {
 			}
 
 			if (images.value.localizationImage !== undefined) {
-				this.changeLocalizationImages(images.value.localizationImage);
+				runInAction(() => {
+					this.localizationImages = images.value.localizationImage;
+				});
 			}
 
 			if (images.value.themeImage !== undefined) {
-				this.changeThemeImages(images.value.themeImage);
+				runInAction(() => {
+					this.themeImages = images.value.themeImage;
+				});
 			}
 
 			if (background.value !== null) {
-				this.changeBackgroundImage(background.value);
+				runInAction(() => {
+					this.backgroundImage = background.value!;
+				});
 			}
-		}).then(() => loaded = true);
+		});
 	}
 
-	async changeLocalizationImages(localizationImages?: LocalizationImage) {
+	public async changeLocalizationImages(localizationImages?: LocalizationImage) {
 		this.localizationImages = localizationImages;
-		if (!loaded) {
-			return;
-		}
 	
 		if (imageState.localizationImages !== undefined) {
-			await saveLocalizationImages(imageState.localizationImages);
+			saveLocalizationImages(imageState.localizationImages);
 		} else {
-			await removeImages('localization');
+			removeImages('localization');
 		}
 	}
 
-	async changeThemeImages(themeImages?: ThemeImage) {
+	public async changeThemeImages(themeImages?: ThemeImage) {
 		this.themeImages = themeImages;
-		if (!loaded) {
-			return;
-		}
-	
+
 		if (imageState.themeImages !== undefined) {
-			await saveThemeImages(imageState.themeImages);
+			saveThemeImages(imageState.themeImages);
 		} else {
-			await removeImages('theme');
+			removeImages('theme');
 		}
 	}
 
-	async changeBackgroundImage(backgroundImage?: string) {
+	public async changeBackgroundImage(backgroundImage?: string) {
 		this.backgroundImage = backgroundImage;
-		if (!loaded) {
-			return;
-		}
-	
+
 		if (imageState.backgroundImage !== undefined) {
-			await saveBackgroundImage(imageState.backgroundImage);
+			saveBackgroundImage(imageState.backgroundImage);
 		} else {
-			await removeBackgroundImage();
+			removeBackgroundImage();
 		}
 	}
 }

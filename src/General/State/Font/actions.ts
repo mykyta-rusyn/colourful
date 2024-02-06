@@ -8,8 +8,6 @@ export async function saveFontFamily(fontFamily: FontFamily): Promise<void> {
 	return await AsyncStorage.setItem(fontFamilyKey, fontFamily);
 }
 
-export async function loadFontFamily(): Promise<string | undefined> {
-	const fontFamily = await AsyncStorage.getItem(fontFamilyKey);
-
-	return fontFamily ?? undefined;
+export async function loadFontFamily(): Promise<string | null> {
+	return await AsyncStorage.getItem(fontFamilyKey);
 }
