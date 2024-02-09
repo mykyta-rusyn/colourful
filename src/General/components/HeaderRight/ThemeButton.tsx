@@ -34,4 +34,4 @@ export const ThemeButton: React.FC = observer(() => {
 			/>
 		</AnimatedTouchableOpacity>
 	);
-});
+}, ['themeState', 'imageState']);

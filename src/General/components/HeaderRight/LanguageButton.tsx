@@ -45,4 +45,4 @@ export const LanguageButton: React.FC = observer(() => {
 			/>
 		</TouchableOpacity>
 	);
-});
+}, ['imageState']);

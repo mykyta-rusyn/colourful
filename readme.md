@@ -1,4 +1,3 @@
 ## Stack
 - mobx
 - mobx-react
-- 
