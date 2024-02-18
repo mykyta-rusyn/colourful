@@ -56,11 +56,15 @@ class ThemeState {
 			toggleTheme: action
 		});
 
-		loadTheme().then((theme) => {
-			if (theme !== null && theme !== this.theme) {
-				runInAction(() => (this.theme = theme as ThemeType));
-			}
-		});
+		this._preloadTheme();
+	}
+
+	private async _preloadTheme() {
+		const theme = await loadTheme();
+
+		if (theme !== null && theme !== this.theme) {
+			runInAction(() => (this.theme = theme as ThemeType));
+		}
 	}
 	
 	public async toggleTheme() {

@@ -20,19 +20,23 @@ class FontState {
 			toggleFontFamily: action
 		});
 
-		loadFontFamily().then((fontFamily) => {
-			if (fontFamily !== null) {
-				runInAction(() => this.fontFamily = fontFamily as FontFamily);
-			}
-		});
+		this._preloadFontFamily();
 	}
 
-	toggleFontFamily(): void {
+	private async _preloadFontFamily() {
+		const fontFamily = await loadFontFamily();
+
+		if (fontFamily !== null) {
+			runInAction(() => this.fontFamily = fontFamily as FontFamily);
+		}
+	}
+
+	public toggleFontFamily(): void {
 		this.fontFamily = this.fontFamily === 'Oswald' ? 'Roboto' : 'Oswald';
 		saveFontFamily(fontState.fontFamily);
 	}
 
-	removeFontFamily(): void {
+	public removeFontFamily(): void {
 		this.fontFamily = 'Oswald';
 	}
 }

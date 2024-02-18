@@ -19,14 +19,20 @@ class ImageState {
 			changeThemeImages: action,
 		});
 
-		Promise.allSettled([
+		this._preloadImages();
+	}
+
+	private async _preloadImages() {
+		const [images, background] = await Promise.allSettled([
 			loadImages(),
 			loadBackgroundImage()
-		]).then(([images, background]) => {
-			if (images.status === 'rejected' || background.status === 'rejected') {
-				return;
-			}
+		]);
 
+		if (background.status === 'fulfilled' && background.value !== null) {
+			runInAction(() => this.backgroundImage = background.value!);
+		}
+
+		if (images.status === 'fulfilled') {
 			if (images.value.localizationImage !== undefined) {
 				runInAction(() => {
 					this.localizationImages = images.value.localizationImage;
@@ -38,13 +44,7 @@ class ImageState {
 					this.themeImages = images.value.themeImage;
 				});
 			}
-
-			if (background.value !== null) {
-				runInAction(() => {
-					this.backgroundImage = background.value!;
-				});
-			}
-		});
+		}
 	}
 
 	public async changeLocalizationImages(localizationImages?: LocalizationImage) {
